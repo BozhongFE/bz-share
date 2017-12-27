@@ -1,20 +1,26 @@
-import ObjectAssign from 'object-assign';
+(function (global, factory) {
+	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('object-assign')) :
+	typeof define === 'function' && define.amd ? define(['object-assign'], factory) :
+	(global['bz-share'] = factory(global.ObjectAssign));
+}(this, (function (ObjectAssign) { 'use strict';
+
+ObjectAssign = ObjectAssign && ObjectAssign.hasOwnProperty('default') ? ObjectAssign['default'] : ObjectAssign;
 
 Object.assign = ObjectAssign;
 
-const appReg = /bz-([A-Za-z]{1,50})-(android|ios)/;
-const wechatReg = /micromessenger/i;
+var appReg = /bz-([A-Za-z]{1,50})-(android|ios)/;
+var wechatReg = /micromessenger/i;
 
 function getLink(prefix, productPrefix) {
-  const host = window.location.host;
-  const prodPrefix = productPrefix || prefix;
+  var host = window.location.host;
+  var prodPrefix = productPrefix || prefix;
 
   if (host.indexOf('office') !== -1) {
-    return `//${prefix}.office.bzdev.net`;
+    return ("//" + prefix + ".office.bzdev.net");
   } else if (host.indexOf('online') !== -1) {
-    return `//${prefix}.online.seedit.cc`;
+    return ("//" + prefix + ".online.seedit.cc");
   }
-  return `//${prodPrefix}.bozhong.com`;
+  return ("//" + prodPrefix + ".bozhong.com");
 }
 
 // 判断是否是函数
@@ -24,10 +30,10 @@ function isFunc(functionName) {
 
 // 创建一个 jsonp 请求
 function jsonp(url, callback) {
-  const callbackName = `jsonp_${Date.now()}`;
-  const headEl = document.getElementsByTagName('head')[0];
-  const script = document.createElement('script');
-  const scriptUrl = `${url}&__c=${callbackName}`;
+  var callbackName = "jsonp_" + (Date.now());
+  var headEl = document.getElementsByTagName('head')[0];
+  var script = document.createElement('script');
+  var scriptUrl = url + "&__c=" + callbackName;
   script.src = scriptUrl;
   headEl.appendChild(script);
 
@@ -40,7 +46,7 @@ function jsonp(url, callback) {
 
 function appCallback(successCB, cancelCB) {
   if (successCB || cancelCB) {
-    window.setShareStatus = (status) => {
+    window.setShareStatus = function (status) {
       if (status === 0) {
         if (isFunc(successCB)) {
           successCB();
@@ -53,36 +59,35 @@ function appCallback(successCB, cancelCB) {
 }
 
 function appShare(options) {
-  const opts = options;
-  let shareEl = document.getElementById('share');
+  var opts = options;
+  var shareEl = document.getElementById('share');
 
   if (!shareEl) {
-    const shareDiv = document.createElement('div');
+    var shareDiv = document.createElement('div');
     shareDiv.setAttribute('id', 'share');
     document.querySelector('body').appendChild(shareDiv);
     shareEl = document.getElementById('share');
   }
   shareEl.style.display = 'none';
 
-  const defaultOptions = {
+  var defaultOptions = {
     type: 'webShare',
     shareList: [
       'ShareTypeSinaWeibo',
       'ShareTypeQQSpace',
       'ShareTypeWeixinSession',
-      'ShareTypeWeixinTimeline',
-    ],
+      'ShareTypeWeixinTimeline' ],
   };
-  const appOptions = opts.app;
-  const shareOptions = Object.assign(defaultOptions, appOptions);
-  const scheme = encodeURIComponent(JSON.stringify(shareOptions));
+  var appOptions = opts.app;
+  var shareOptions = Object.assign(defaultOptions, appOptions);
+  var scheme = encodeURIComponent(JSON.stringify(shareOptions));
   shareEl.textContent = scheme;
 
   // 如果设置了分享按钮
   if (opts.button) {
-    const btnEl = document.querySelectorAll(options.button);
+    var btnEl = document.querySelectorAll(options.button);
     if (btnEl.length > 0) {
-      for (let i = 0; i < btnEl.length; i += 1) {
+      for (var i = 0; i < btnEl.length; i += 1) {
         btnEl[i].href = opts.protocol + scheme;
       }
     }
@@ -94,15 +99,15 @@ function appShare(options) {
 }
 
 function wechatShare(options) {
-  const opts = options;
-  const appOptions = opts.app;
-  const wxOptions = opts.wechat;
-  const wx = wxOptions.sdk;
-  const appId = wxOptions.appId ? wxOptions.appId : 'wx06297e68f1f987bd'; // 默认使用「要个宝宝」的 APP ID
-  const apiUrl = `${getLink('huodong')}/restful/weixin/tool.jsonp?type=4&service_appid=${appId}&url=${encodeURIComponent(window.location.href.split('#')[0])}`;
+  var opts = options;
+  var appOptions = opts.app;
+  var wxOptions = opts.wechat;
+  var wx = wxOptions.sdk;
+  var appId = wxOptions.appId ? wxOptions.appId : 'wx06297e68f1f987bd'; // 默认使用「要个宝宝」的 APP ID
+  var apiUrl = (getLink('huodong')) + "/restful/weixin/tool.jsonp?type=4&service_appid=" + appId + "&url=" + (encodeURIComponent(window.location.href.split('#')[0]));
 
-  jsonp(apiUrl, (data) => {
-    let wxConfig = {
+  jsonp(apiUrl, function (data) {
+    var wxConfig = {
       config: {
         debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
         appId: data.data.appid, // 必填，企业号的唯一标识，此处填写企业号corpid
@@ -116,8 +121,7 @@ function wechatShare(options) {
           'showOptionMenu',
           'hideMenuItems',
           'showMenuItems',
-          'getNetworkType',
-        ],
+          'getNetworkType' ],
       },
       hideMenuList: [
         'menuItem:favorite',
@@ -133,8 +137,7 @@ function wechatShare(options) {
         'menuItem:share:brand',
         'menuItem:editTag',
         'menuItem:setFont',
-        'menuItem:readMode',
-      ],
+        'menuItem:readMode' ],
       messageShare: {
         title: appOptions.weixinSessionTitle || appOptions.title || '', // 分享标题
         desc: appOptions.weixinSessionContent || appOptions.content || '', // 分享摘要
@@ -146,10 +149,10 @@ function wechatShare(options) {
         link: appOptions.weixinTimelineUrl || appOptions.url || '',
         imgUrl: appOptions.weixinTimelineImage || appOptions.image || '',
       },
-      wxReadyAppend() {
+      wxReadyAppend: function wxReadyAppend() {
         // 默认为空
       },
-      wxReady() {
+      wxReady: function wxReady() {
         // 分享给朋友
         wx.onMenuShareAppMessage(wxConfig.messageShare);
 
@@ -163,10 +166,10 @@ function wechatShare(options) {
 
         wxConfig.wxReadyAppend();
       },
-      wxError(res) {
+      wxError: function wxError(res) {
         console.log(res);
       },
-      init() {
+      init: function init() {
         wxConfig = Object.assign(wxConfig, wxOptions.options);
 
         if (wxOptions.debug) {
@@ -207,11 +210,11 @@ function wechatShare(options) {
 }
 
 function share(options) {
-  const ua = window.navigator.userAgent;
-  const isApp = appReg.test(ua);
-  const isWechat = wechatReg.test(ua);
-  const opts = options;
-  const protocol = 'fkzr://'; // 默认协议头
+  var ua = window.navigator.userAgent;
+  var isApp = appReg.test(ua);
+  var isWechat = wechatReg.test(ua);
+  var opts = options;
+  var protocol = 'fkzr://'; // 默认协议头
 
   if (!opts.protocol) {
     opts.protocol = protocol;
@@ -224,6 +227,10 @@ function share(options) {
   }
 }
 
-export default {
-  share,
+var index = {
+  share: share,
 };
+
+return index;
+
+})));

@@ -25,21 +25,25 @@ npm run build
       - `messageShare` (Object)：参考 wx.onMenuShareAppMessage
       - `timelineShare` (Object)：参考 wx.onMenuShareTimeline
       - `wxReady` (Function)：参考 wx.ready 回调函数
+      - `wxReadyAppend` (Function)：在 wxReady 最后执行的函数，v0.2.0 新增
       - `wxError` (Function)：参考 wx.error 回调函数
-  - `protocol` (string)：可选，APP协议头。**Default:** fkzr://
+  - `protocol` (string)：可选，APP 协议头。**Default:** fkzr://
   - `button` (string)：可选，点击弹出分享的按钮
+  - `common` (Object)：可选，微信和 APP 通用函数
+    - `success` (Function)：可选，通用分享成功函数
+    - `cancel` (Function)：可选，通用分享取消函数
 
 **Example**
 
 script 标签引用微信 JS-SDK
 ```html
 <!-- 这种引用方式需要放在 require.js 之前 -->
-<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+<script src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
 ```
 
 require.js 引用微信 JS-SDK，两种方式用任意一种即可。
 ```javascript
-require(['http://res.wx.qq.com/open/js/jweixin-1.2.0.js'], function (wx) {
+require(['https://res.wx.qq.com/open/js/jweixin-1.2.0.js'], function (wx) {
   // do something...
 });
 ```
@@ -73,12 +77,23 @@ bzShare.share({
       hideMenuList: [],
       messageShare: {},
       timelineShare: {},
+      wxReadyAppend: function () {
+        // append something...
+      },
       wxReady: function() {
         // do something...
       },
       wxError: function () {
         // do something...
       },
+    },
+  },
+  common: {
+    success: function () {
+      // do something...
+    },
+    cancel: function () {
+      // do something...
     },
   },
   protocol: 'fkzr://',
