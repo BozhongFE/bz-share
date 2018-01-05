@@ -76,7 +76,8 @@ function appShare(options) {
       'ShareTypeSinaWeibo',
       'ShareTypeQQSpace',
       'ShareTypeWeixinSession',
-      'ShareTypeWeixinTimeline' ],
+      'ShareTypeWeixinTimeline',
+      'ShareTypeQQFriend' ],
   };
   var appOptions = opts.app;
   var shareOptions = Object.assign(defaultOptions, appOptions);

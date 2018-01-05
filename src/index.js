@@ -71,6 +71,7 @@ function appShare(options) {
       'ShareTypeQQSpace',
       'ShareTypeWeixinSession',
       'ShareTypeWeixinTimeline',
+      'ShareTypeQQFriend',
     ],
   };
   const appOptions = opts.app;
