@@ -27,7 +27,7 @@ npm run build
       - `wxReady` (Function)：参考 wx.ready 回调函数
       - `wxReadyAppend` (Function)：在 wxReady 最后执行的函数，v0.2.0 新增
       - `wxError` (Function)：参考 wx.error 回调函数
-  - `protocol` (string)：可选，APP 协议头。**Default:** fkzr://
+  - `protocol` (string)：可选，APP 协议头。**Default:** bzinner://
   - `button` (string)：可选，点击弹出分享的按钮
   - `common` (Object)：可选，微信和 APP 通用函数
     - `success` (Function)：可选，通用分享成功函数
@@ -53,12 +53,14 @@ var bzShare = require('bz-share');
 bzShare.share({
   app: {
     type: 'webShare',
-    shareList: [
-      'ShareTypeSinaWeibo',
-      'ShareTypeQQSpace',
-      'ShareTypeWeixinSession',
-      'ShareTypeWeixinTimeline',
-    ],
+    // 默认全部分享时，不要配置此项
+    //shareList: [
+    //  'ShareTypeSinaWeibo',
+    //  'ShareTypeQQSpace',
+    //  'ShareTypeWeixinSession',
+    //  'ShareTypeWeixinTimeline',
+    //  'ShareTypeQQFriend',
+    //],
     content: '内容',
     title: '标题',
     image: 'http://example.com/example.png',

@@ -63,10 +63,12 @@ function appShare(options) {
     shareEl = document.getElementById('share');
   }
   shareEl.style.display = 'none';
-
+  var ua = window.navigator.userAgent;
   var defaultOptions = {
     type: 'webShare',
-    shareList: [
+    // 兼容android孕迹，新增qq时不能分享，/bz-tracker-(android|ios)/.test(ua)
+    shareList: /bz-tracker-(android|ios)/.test(ua) ? [] : [
+      // 默认全部分享时，不要配置
       'ShareTypeSinaWeibo',
       'ShareTypeQQSpace',
       'ShareTypeWeixinSession',
@@ -209,7 +211,7 @@ function share(options) {
   var isApp = appReg.test(ua);
   var isWechat = wechatReg.test(ua);
   var opts = options;
-  var protocol = 'fkzr://'; // 默认协议头
+  var protocol = 'bzinner://'; // 默认协议头
 
   if (!opts.protocol) {
     opts.protocol = protocol;
