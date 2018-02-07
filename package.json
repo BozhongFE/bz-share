@@ -1,7 +1,7 @@
 {
   "name": "bz-share",
   "version": "0.2.0",
-  "description": "播种网登录模块",
+  "description": "播种网分享模块",
   "main": "dist/bz-share.umd.js",
   "module": "dist/bz-share.esm.js",
   "scripts": {
