@@ -166,8 +166,18 @@ function wechatShare(options) {
       wxError: function wxError(res) {
         console.log(res);
       },
+      initApiConfig: function initApiConfig() {
+        wxConfig.config = Object.assign(wxConfig.config, {
+          appId: data.data.appid, // 必填，企业号的唯一标识，此处填写企业号corpid
+          timestamp: data.data.timestamp, // 必填，生成签名的时间戳
+          nonceStr: data.data.noncestr, // 必填，生成签名的随机串
+          signature: data.data.signature, // 必填，签名，见附录1
+        });
+      },
       init: function init() {
         wxConfig = Object.assign(wxConfig, wxOptions.options);
+        // 上一个步骤覆盖config后，需要重新写入接口数据
+        wxConfig.initApiConfig();
 
         if (wxOptions.debug) {
           wxConfig.config.debug = wxOptions.debug;

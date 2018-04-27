@@ -1,6 +1,6 @@
 {
   "name": "bz-share",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "播种网分享模块",
   "main": "dist/bz-share.umd.js",
   "module": "dist/bz-share.esm.js",

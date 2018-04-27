@@ -21,6 +21,7 @@ npm run build
     - `appId` (string)：可选，用于授权的微信公众号 APP ID，注意字母大小写
     - `options` (Object)： 可选，以下配置请参考微信 JS-SDK 的对应配置项
       - `config` (Object)：参考 wx.config
+        - `jsApiList` (Array) 参考 wx.config.jsApiList
       - `hideMenuList` (Array)：参考 wx.hideMenuItems.menuList
       - `messageShare` (Object)：参考 wx.onMenuShareAppMessage
       - `timelineShare` (Object)：参考 wx.onMenuShareTimeline
@@ -118,3 +119,7 @@ bzShare.share({
   },
 });
 ```
+
+## 微信
+
+微信参考文档 https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1421141115

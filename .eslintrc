@@ -6,7 +6,8 @@
     "no-unused-expressions": [2, {
       "allowShortCircuit": true
     }],
-    "no-underscore-dangle": 0
+    "no-underscore-dangle": 0,
+    "linebreak-style": 0
   },
   "globals": {
     "window": true,
