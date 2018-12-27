@@ -52,6 +52,17 @@ function appCallback(successCB, cancelCB) {
   }
 }
 
+let opts;
+// 设置分享按钮，动态渲染的按钮请直接调用方法
+function setShareBtn(selector) {
+  const btnEl = document.querySelectorAll(selector);
+  if (btnEl.length > 0) {
+    for (let i = 0; i < btnEl.length; i += 1) {
+      btnEl[i].href = opts.protocol + opts.scheme;
+    }
+  }
+}
+
 function appShare(options) {
   const opts = options;
   let shareEl = document.getElementById('share');
@@ -78,18 +89,11 @@ function appShare(options) {
   };
   const appOptions = opts.app;
   const shareOptions = Object.assign(defaultOptions, appOptions);
-  const scheme = encodeURIComponent(JSON.stringify(shareOptions));
-  shareEl.textContent = scheme;
+  opts.scheme = encodeURIComponent(JSON.stringify(shareOptions));
+  shareEl.textContent = opts.scheme;
 
   // 如果设置了分享按钮
-  if (opts.button) {
-    const btnEl = document.querySelectorAll(options.button);
-    if (btnEl.length > 0) {
-      for (let i = 0; i < btnEl.length; i += 1) {
-        btnEl[i].href = opts.protocol + scheme;
-      }
-    }
-  }
+  if (opts.button) setShareBtn(opts.button);
 
   if (opts.common) {
     appCallback(opts.common.success, opts.common.cancel);
@@ -223,7 +227,7 @@ function share(options) {
   const ua = window.navigator.userAgent;
   const isApp = appReg.test(ua);
   const isWechat = wechatReg.test(ua);
-  const opts = options;
+  opts = options;
   const protocol = 'bzinner://'; // 默认协议头
 
   if (!opts.protocol) {
@@ -237,6 +241,8 @@ function share(options) {
   }
 }
 
+
 export default {
   share,
+  setShareBtn,
 };

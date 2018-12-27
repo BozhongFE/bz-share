@@ -34,6 +34,12 @@ npm run build
     - `success` (Function)：可选，通用分享成功函数
     - `cancel` (Function)：可选，通用分享取消函数
 
+### setShareBtn(selector)
+
+**Arguments**
+
+- `selector` (String): 必填，点击弹出分享的按钮的选择器，需先执行share()后使用
+
 **Example**
 
 script 标签引用微信 JS-SDK
