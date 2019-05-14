@@ -163,6 +163,13 @@ function wechatShare(options) {
         // 分享到朋友圈
         wx.onMenuShareTimeline(wxConfig.timelineShare);
 
+        // 显示微信右上角菜单列表（避免单页面应用中多次调用）
+        if (wxConfig.showMenuList) {
+          wx.showOptionMenu({
+            menuList: wxConfig.showMenuList,
+          });
+        }
+
         // 隐藏微信右上角菜单列表
         wx.hideMenuItems({
           menuList: wxConfig.hideMenuList,
