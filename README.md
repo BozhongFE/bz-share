@@ -128,10 +128,10 @@ bzShare.share({
 
 ## Feature
 
-* [] 参数 `button` 目前只支持a标签，现在也需要支持非 a 标签，同时，检查这个 button !== '#share'
-* [] 检查页面是否出现两个以上的id为share的标签，有的话抛出错误提示
-* [] 对微信分享jssdk接口请求授权信息做缓存
-* [] 微信分享使用的appId 改成读取公共配置 source/common/js/config.js
+* [ ] 参数 `button` 目前只支持a标签，现在也需要支持非 a 标签，同时，检查这个 button !== '#share'
+* [ ] 检查页面是否出现两个以上的id为share的标签，有的话抛出错误提示
+* [ ] 对微信分享jssdk接口请求授权信息做缓存
+* [ ] 微信分享使用的appId 改成读取公共配置 source/common/js/config.js
 
 ## 微信
 
