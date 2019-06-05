@@ -1,6 +1,44 @@
 # bz-share
 播种网分享模块
 
+## 调用方式
+
+#### 右上角配置（每次点击右上角都会从页面内读取 `id` 为 `share` 的配置）
+
+静态内容配置
+```html
+<div id="share>{"bzWebviewBtn":"0000"}</div>
+```
+
+动态写入配置项
+```js
+document.body.querySelector('#share').innerHTML = JSON.stringify({
+  bzWebviewBtn: '0000',
+});
+```
+
+#### 页面内按钮调用分享（通过协议方式调用）
+```js
+window.location.href = 'bzinner://' + encodeURIComponent(JSON.stringify({
+  type: 'webShare',
+  content: '内容',
+  title: '标题',
+  image: 'http://img.bozhong.com/sys/2017/08/11/db873b434a501df87ed37dee5764e5de618022.jpg',
+  url: 'http://m.bozhong.com',
+  bzWebviewBtn: '1100',
+}))
+```
+
+#### 客户端内部大概写法
+```js
+javascript:
+if(document.getElementById('share') && document.getElementById('share').innerHTML) {
+  window.Crazy.getJson(document.getElementById('share').innerHTML, false);
+} else {
+  window.Crazy.getJson(ShareContent.DEFAULT_EMPTY_SHARECONTENT, true);
+}
+```
+
 ## 打包
 
 ```shell
