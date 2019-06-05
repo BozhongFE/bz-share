@@ -1,9 +1,11 @@
 # bz-share
 播种网分享模块
 
-## 调用方式
+## 站内app调用方式
 
 #### 右上角配置（每次点击右上角都会从页面内读取 `id` 为 `share` 的配置）
+
+所以页面只允许只有一个share的id，
 
 静态内容配置
 ```html
@@ -18,15 +20,35 @@ document.body.querySelector('#share').innerHTML = JSON.stringify({
 ```
 
 #### 页面内按钮调用分享（通过协议方式调用）
-```js
-window.location.href = 'bzinner://' + encodeURIComponent(JSON.stringify({
-  type: 'webShare',
-  content: '内容',
-  title: '标题',
-  image: 'http://img.bozhong.com/sys/2017/08/11/db873b434a501df87ed37dee5764e5de618022.jpg',
-  url: 'http://m.bozhong.com',
-  bzWebviewBtn: '1100',
-}))
+```html
+<div id="btnShare">点击分享</div>
+<script>
+document.body.querySelector('#btnShare').addEventLister('click', function() {
+  window.location.href = 'bzinner://' + encodeURIComponent(JSON.stringify({
+    type: 'webShare',
+    content: '内容',
+    title: '标题',
+    image: 'http://img.bozhong.com/sys/2017/08/11/db873b434a501df87ed37dee5764e5de618022.jpg',
+    url: 'http://m.bozhong.com',
+    bzWebviewBtn: '1100',
+  }));
+}, false);
+</script>
+```
+或者绑定a标签的href来触发分享，记得是a
+
+```html
+<a id="btnShare" href="">点击分享</a>
+<script>
+  document.body.querySelector('#btnShare').href = 'bzinner://' + encodeURIComponent(JSON.stringify({
+    type: 'webShare',
+    content: '内容',
+    title: '标题',
+    image: 'http://img.bozhong.com/sys/2017/08/11/db873b434a501df87ed37dee5764e5de618022.jpg',
+    url: 'http://m.bozhong.com',
+    bzWebviewBtn: '1100',
+  }));
+</script>
 ```
 
 #### 客户端内部大概写法
