@@ -129,3 +129,7 @@ bzShare.share({
 ## 微信
 
 微信参考文档 https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1421141115
+
+## 原始调用方式与原理说明
+
+https://github.com/BozhongFE/bz-share/wiki
