@@ -20,3 +20,10 @@
 
 ## 0.3.2
 `fix` 新增wechat.options.showMenuList配置，用于单页面应用中关闭分享后再次开启
+
+## 0.3.3
+`new` 参数 button 目前只支持a标签，现在也需要支持非 a 标签，同时，检查这个 button !== '#share'
+`new` 检查页面是否出现两个以上的id为share的标签，有的话抛出错误提示
+`new` 对微信分享jssdk接口请求授权信息做缓存
+`new` 不重复对微信进行配置
+`new` 微信分享使用的appId 改成读取公共配置 source/common/js/config.js
