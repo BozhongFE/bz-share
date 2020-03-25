@@ -27,3 +27,6 @@
 `new` 对微信分享jssdk接口请求授权信息做缓存
 `new` 不重复对微信进行配置
 `new` 微信分享使用的appId 改成读取公共配置 source/common/js/config.js
+
+## 0.3.4
+`fix` 无法重新覆盖微信配置
