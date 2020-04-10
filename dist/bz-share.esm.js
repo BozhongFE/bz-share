@@ -119,7 +119,7 @@ var jsdRequestData = null;
 function wechatShare(options) {
   var opts = options;
   var wxOptions = opts.wechat;
-  var appId = wxOptions.appId || (window.bzConfig && window.bzConfig.wechatId) || 'wx06297e68f1f987bd'; // 默认使用「要个宝宝」的 APP ID
+  var appId = wxOptions.appId || (window.bzConfig && window.bzConfig.wechatId) || 'wx94d275603a55a2d8'; // 默认使用「要个宝宝」的 APP ID
   var apiUrl = (getLink('huodong')) + "/restful/weixin/tool.jsonp?type=4&service_appid=" + appId + "&url=" + (encodeURIComponent(window.location.href.split('#')[0]));
 
   if (!jsdRequestData) {
